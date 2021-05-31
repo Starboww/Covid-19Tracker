@@ -1,7 +1,7 @@
 package `in`.starbow.covid19_tracker
 
 data class Response(
-	val statewise: List<StatewiseItem?>? = null
+	val statewise: List<StatewiseItem>
 )
 
 data class StatewiseItem(
