@@ -91,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/dark_red"
+            android:textColor="@color/dark_blue"
             android:layout_marginTop="8sp"/>
     </LinearLayout>
 
@@ -145,11 +145,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/dark_red"
+            android:textColor="@color/dark_yellow"
             android:layout_marginTop="8sp"/>
     </LinearLayout>
 
 </LinearLayout>
-
+<ListView
+    android:layout_below="@id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/list"
+    android:layout_marginBottom="16dp"/>
 
 </RelativeLayout>

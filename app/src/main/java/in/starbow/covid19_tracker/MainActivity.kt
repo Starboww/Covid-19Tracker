@@ -3,6 +3,7 @@ package `in`.starbow.covid19_tracker
 import `in`.starbow.covid19_tracker.databinding.ActivityMainBinding
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -13,11 +14,13 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
+    lateinit var stateAdapter: StateAdapter
     private lateinit var bind:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind= ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
+        bind.list.addHeaderView(LayoutInflater.from(this).inflate(R.layout.itemheader,bind.list,false))
         fetchResult()
     }
     private fun fetchResult(){
@@ -29,10 +32,16 @@ class MainActivity : AppCompatActivity() {
                 val data = Gson().fromJson(response.body?.string(),Response::class.java)
                 launch(Dispatchers.Main) {
                     bindCombinedData(data.statewise[0])
+                    bindStatewisedata(data.statewise.subList(0,data.statewise.size))
                 }
             }
         }
 
+    }
+
+    private fun bindStatewisedata(subList: List<StatewiseItem>) {
+            stateAdapter=StateAdapter((subList))
+        bind.list.adapter=stateAdapter
     }
 
     private fun bindCombinedData(data: StatewiseItem) {
